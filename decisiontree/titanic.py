@@ -43,7 +43,7 @@ def titanic(ntree, numFolds, isGini, minInfoGainMaxGiniIndex):
             trainingSet += folds[j]
         for j in range(i + 1, numFolds):
             trainingSet += folds[j]
-        forest = createForestNoThread( ntree, trainingSet, typeArray, isGini, minInfoGainMaxGiniIndex)
+        forest = createForest(ntree, trainingSet, typeArray, isGini, minInfoGainMaxGiniIndex)
         accuracy, precision, recall, f1 = testing(forest, testingSet)
         totalAccuracy += accuracy
         totalPrecision += precision
@@ -71,7 +71,6 @@ def runTitanic(isGini, minInfoGainMaxGiniIndex):
         accuracy.append(newAccuracy)
         precision.append(newPrecision)
         recall.append(newRecall)
-        f1.append(newF1)
     plt.plot(ntreeValues, accuracy)
     plt.ylabel('accuracy')
     plt.xlabel('number of trees')

@@ -155,5 +155,5 @@ def createForestNoThread(ntree, trainingSet, typeArray, isGini, minInfoGainMaxGi
     lock = Lock()
     forest = []
     for j in range(ntree):
-        forest.append(createDecisionTree(bootstrapping(trainingSet), len(trainingSet[0]) / 2, minInfoGainMaxGiniIndex, typeArray, isGini))
+        forest.append(createDecisionTree(trainingSet, len(trainingSet[0]) / 2, minInfoGainMaxGiniIndex, typeArray, isGini))
     return forest
