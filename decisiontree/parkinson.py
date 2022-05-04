@@ -33,7 +33,8 @@ def parkinson(ntree, numFolds, isGini, minInfoGainMaxGiniIndex):
             trainingSet += folds[j]
         for j in range(i + 1, numFolds):
             trainingSet += folds[j]
-        forest = createForest(ntree, trainingSet, typeArray, isGini, minInfoGainMaxGiniIndex)
+        for j in range(ntree):
+            forest.append(createDecisionTree(bootstrapping(trainingset), len(dataset[0]) / 2, 1, typeArray, isGini))
         accuracy, precision, recall, f1 = testing(forest, testingSet)
         totalAccuracy += accuracy
         totalPrecision += precision
@@ -50,7 +51,7 @@ def parkinson(ntree, numFolds, isGini, minInfoGainMaxGiniIndex):
     print("----------------------------------------")
     return averageAccuracy, averagePrecision, averageRecall, averageF1
 
-def runTitanic(isGini, minInfoGainMaxGiniIndex):
+def runParkinson(isGini, minInfoGainMaxGiniIndex):
     accuracy = []
     precision = []
     recall = []
