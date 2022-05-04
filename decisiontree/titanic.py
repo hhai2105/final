@@ -65,7 +65,7 @@ def runTitanic(isGini, minInfoGainMaxGiniIndex):
     precision = []
     recall = []
     f1 = []
-    ntreeValues = [1, 2, 10, 20, 30, 40, 50]
+    ntreeValues = [1, 5, 10]
     for i in range(len(ntreeValues)):
         newAccuracy, newPrecision, newRecall, newF1 = titanic(ntreeValues[i], 10, isGini, minInfoGainMaxGiniIndex)
         accuracy.append(newAccuracy)
