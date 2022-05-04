@@ -10,7 +10,6 @@ numba.jit
 def parkinson(ntree, numFolds, isGini, minInfoGainMaxGiniIndex):
     numFolds = 10
     dataset = pd.read_csv('./datasets/parkinsons.csv', sep=",",header=0)
-
     dataset = dataset.to_records(index=False)
 
     #create datatype array
@@ -58,7 +57,7 @@ def runParkinson(isGini, minInfoGainMaxGiniIndex):
     f1 = []
     ntreeValues = [1, 5, 10, 20]
     for i in range(len(ntreeValues)):
-        newAccuracy, newPrecision, newRecall, newF1 = titanic(ntreeValues[i], 10, isGini, minInfoGainMaxGiniIndex)
+        newAccuracy, newPrecision, newRecall, newF1 = parkinson(ntreeValues[i], 10, isGini, minInfoGainMaxGiniIndex)
         accuracy.append(newAccuracy)
         precision.append(newPrecision)
         recall.append(newRecall)
