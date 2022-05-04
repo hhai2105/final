@@ -7,26 +7,26 @@ import numba
 
 numba.jit
 
-def titanic(ntree, numFolds, isGini, minInfoGainMaxGiniIndex):
+def loan(ntree, numFolds, isGini, minInfoGainMaxGiniIndex):
     numFolds = 10
-    dataset = pd.read_csv('./datasets/titanic.csv', sep=",",header=0)
-
-    #remove name
-    classColumn = dataset.pop("Name")
-
-    #moving class to the end
-    classColumn = dataset.pop("Survived")
-    dataset.insert(len(dataset.columns),"Survived", classColumn)
+    dataset = pd.read_csv('./datasets/loan.csv', sep=",",header=0)
+    dataset.pop("Loan_ID")
     dataset = dataset.to_records(index=False)
 
     #create datatype array
     typeArray = []
     typeArray.append("categorical")
     typeArray.append("categorical")
+    typeArray.append("categorical")
+    typeArray.append("categorical")
+    typeArray.append("categorical")
     typeArray.append("numerical")
     typeArray.append("numerical")
     typeArray.append("numerical")
     typeArray.append("numerical")
+    typeArray.append("categorical")
+    typeArray.append("categorical")
+
 
     #stratifiedkfolds
     folds = stratifiedKFold(dataset, numFolds)
@@ -61,14 +61,14 @@ def titanic(ntree, numFolds, isGini, minInfoGainMaxGiniIndex):
     print("----------------------------------------")
     return averageAccuracy, averagePrecision, averageRecall, averageF1
 
-def runTitanic(isGini, minInfoGainMaxGiniIndex):
+def runLoan(isGini, minInfoGainMaxGiniIndex):
     accuracy = []
     precision = []
     recall = []
     f1 = []
     ntreeValues = [1, 5, 10, 20]
     for i in range(len(ntreeValues)):
-        newAccuracy, newPrecision, newRecall, newF1 = titanic(ntreeValues[i], 10, isGini, minInfoGainMaxGiniIndex)
+        newAccuracy, newPrecision, newRecall, newF1 = loan(ntreeValues[i], 10, isGini, minInfoGainMaxGiniIndex)
         accuracy.append(newAccuracy)
         precision.append(newPrecision)
         recall.append(newRecall)
@@ -77,26 +77,26 @@ def runTitanic(isGini, minInfoGainMaxGiniIndex):
     plt.plot(ntreeValues, accuracy)
     plt.ylabel('accuracy')
     plt.xlabel('number of trees')
-    plt.title('correlation between accuracy and number of trees (titanic)')
-    fig.savefig("accuracyTitanic.png")
+    plt.title('correlation between accuracy and number of trees (loan)')
+    fig.savefig("accuracyLoan.png")
     fig1 = plt.figure()
     plt.plot(ntreeValues, precision)
     plt.ylabel('precision')
     plt.xlabel('number of trees')
-    plt.title('correlation between precision and number of trees (titanic)')
-    fig1.savefig("precisionTitanic.png")
+    plt.title('correlation between precision and number of trees (loan)')
+    fig1.savefig("precisionLoan.png")
     fig2 = plt.figure()
     plt.plot(ntreeValues, recall)
     plt.ylabel('recall')
     plt.xlabel('number of trees')
-    plt.title('correlation between recall and number of trees (titanic)')
-    fig2.savefig("recallTitanic.png")
+    plt.title('correlation between recall and number of trees (loan)')
+    fig2.savefig("recallLoan.png")
     fig3 = plt.figure()
     plt.plot(ntreeValues, f1)
     plt.ylabel('f1')
     plt.xlabel('number of trees')
-    plt.title('correlation between f1 score and number of trees (titanic)')
-    fig3.savefig("f1Titanic.png")
+    plt.title('correlation between f1 score and number of trees (loan)')
+    fig3.savefig("f1Loan.png")
     plt.show()
 
-runTitanic(0, 0)
+runLoan(0, 0)
