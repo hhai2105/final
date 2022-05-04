@@ -72,6 +72,7 @@ def runTitanic(isGini, minInfoGainMaxGiniIndex):
         accuracy.append(newAccuracy)
         precision.append(newPrecision)
         recall.append(newRecall)
+        f1.append(newF1)
     plt.plot(ntreeValues, accuracy)
     plt.ylabel('accuracy')
     plt.xlabel('number of trees')
