@@ -44,7 +44,7 @@ def titanic(ntree, numFolds, isGini, minInfoGainMaxGiniIndex):
         for j in range(i + 1, numFolds):
             trainingSet += folds[j]
         for j in range(ntree):
-            forest.append(createDecisionTree(bootstrapping(trainingSet), len(dataset[0]) / 2, 1, typeArray, isGini))
+            forest.append(createDecisionTree(bootstrapping(trainingSet), len(dataset[0]) / 2, minInfoGainMaxGiniIndex, typeArray, isGini))
         accuracy, precision, recall, f1 = testing(forest, testingSet)
         totalAccuracy += accuracy
         totalPrecision += precision
@@ -93,4 +93,4 @@ def runTitanic(isGini, minInfoGainMaxGiniIndex):
     plt.title('correlation between f1 score and number of trees (wine)')
     plt.show()
 
-runTitanic(0, 1)
+runTitanic(0, 0)
